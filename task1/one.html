@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 1</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script type="text/javascript">
+      const Table = () => {
+        const [tableData, setTableData] = React.useState([]);
+        const data = [
+          "Onboading Call",
+          "Google Search Console",
+          "Google Analytics Access",
+          "Website Access",
+          "Technical Audit",
+          "Anchor Text and Semantic Analysis",
+          "Competitor Analysis",
+          "Anchor Text / URL Mapping",
+          "Google data studio Report + Local Reporting Suite",
+          "Site Level Optimization",
+          "on Page Optimization",
+          "Content Creation",
+          "Content Publishing",
+          "Premium Press Release",
+          "Authority Niche Placemnts",
+          "Review Managements",
+          "Index Links",
+          "Video Recap",
+        ];
+
+        function handleCellEdit(rowIndex, columnIndex, value) {
+          const newData = [...tableData];
+          // finding the row
+          newData[rowIndex] = newData[rowIndex] || [];
+          // find the specific column
+          newData[rowIndex][columnIndex] = value;
+          setTableData(newData);
+
+          console.log(
+            `Row: ${rowIndex}, Column: ${columnIndex}, New Value: ${value}`
+          );
+        }
+
+        return React.createElement(
+          "table",
+          {},
+          // table body
+          React.createElement(
+            "tbody",
+            {},
+            React.createElement(
+              "tr",
+              {},
+              React.createElement("th", {}, "MONTH 1")
+            ),
+            data.map((ele, rowIndex) =>
+              React.createElement(
+                "tr",
+                { key: rowIndex },
+                React.createElement("td", {}, ele),
+                Array.from({ length: 6 }, (_, colIndex) =>
+                  React.createElement(
+                    "td",
+                    {},
+                    React.createElement("input", {
+                      type: "text",
+                      onChange: (e) =>
+                        handleCellEdit(rowIndex, colIndex, e.target.value),
+                      value: tableData[rowIndex]?.[colIndex] || "",
+                    })
+                  )
+                )
+              )
+            )
+          )
+        );
+      };
+
+      const App = () => {
+        return React.createElement("div", {}, React.createElement(Table));
+      };
+      const root = document.getElementById("root");
+      const reactRoot = ReactDOM.createRoot(root);
+      reactRoot.render(React.createElement(App));
+    </script>
+  </body>
+</html>
