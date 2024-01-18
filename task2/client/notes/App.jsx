@@ -5,8 +5,7 @@ const App = () => {
   return (
     <div>
       <Header />
-        <Note />
-       
+      <Note />
     </div>
   );
 };

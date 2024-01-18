@@ -19,7 +19,7 @@ body {
   padding: 5px 40px;
   position: fixed;
   top: 0;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 /* Note.css */
@@ -30,13 +30,6 @@ body {
   padding: 10px;
   width: 100%;
   overflow-y: auto;
-}
-
-.app-note input {
-  margin-left: 40%;
-  padding: 10px;
-  border: none;
-  outline: none;
 }
 
 .notes {
@@ -83,4 +76,24 @@ body {
 
 .note button:hover {
   background-color: #d32f2f;
+}
+
+.form {
+  display: flex;
+  gap: 20px;
+}
+
+input {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+.form-button {
+  border: none;
+  background-color: rgb(232, 153, 153);
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }

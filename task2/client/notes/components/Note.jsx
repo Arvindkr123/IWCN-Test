@@ -1,52 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import AddNote from "./AddNote";
 
 const Note = () => {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      title: "go to walk",
-      desc: "I am going to park today",
-      date: Date.now(),
-    },
-    {
-      id: 2,
-      title: "go to field",
-      desc: "I will go to my field today",
-      date: Date.now(),
-    },
-    {
-      id: 3,
-      title: "go to surajpur",
-      desc: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat unde ratione quisquam enim quo, ullam odio excepturi odit velit aliquid voluptates ipsam corrupti. Fugiat atque veritatis quasi optio! Animi",
-      date: Date.now(),
-    },
-    {
-      id: 4,
-      title: "meet friends",
-      desc: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat unde ratione quisquam enim quo, ullam odio excepturi odit velit aliquid voluptates ipsam corrupti. Fugiat atque veritatis quasi optio! Animi",
-      date: Date.now(),
-    },
-  ]);
+  const [data, setData] = useState([]);
+  const [refreshScreen, setRefreshScreen] = useState(false);
 
-  const handleDelete = (id) => {
-    const updatedData = data.filter((note) => note.id !== id);
-    setData(updatedData);
+  const handleDelete = async (id) => {
+    await axios.delete("http://localhost:8800/api/notes/" + id);
+    setRefreshScreen((prev) => !prev);
   };
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get("http://localhost:8800/api/notes");
+      setData(res.data);
+    })();
+  }, [refreshScreen]);
 
   return (
     <div className="app-note">
-      <input type="text" placeholder="Take a note.." />
+      <AddNote setRefreshScreen={setRefreshScreen} />
       <div className="notes">
-        {data.map((note) => (
-          <div className="note" key={note.id}>
-            <h4>{note.title}</h4>
-            <p>{note.desc}</p>
-            <div>
-              <span>{new Date(note.date).toLocaleString()}</span>
-              <button onClick={() => handleDelete(note.id)}>delete</button>
+        {data &&
+          data.map((note) => (
+            <div className="note" key={note.id}>
+              <h4>{note.title}</h4>
+              <p>{note.desc}</p>
+              <div>
+                <span>{new Date(note.date).toLocaleString()}</span>
+                <button onClick={() => handleDelete(note.id)}>delete</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+
+        {data.length === 0 && <h1>No Notes Available ! please create</h1>}
       </div>
     </div>
   );
