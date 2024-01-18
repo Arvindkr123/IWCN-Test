@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  position: relative;
+  margin-top: 40px;
+}
+
+.header {
+  width: 100%;
+  height: 40px;
+  background-color: black;
+  color: white;
+  padding: 5px 40px;
+  position: fixed;
+  top: 0;
+  z-index: 1000; 
+}
+
+/* Note.css */
+
+.app-note {
+  background-color: #555;
+  height: 100vh;
+  padding: 10px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.app-note input {
+  margin-left: 40%;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.notes {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+}
+
+.note {
+  width: 300px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+}
+
+.note h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.note p {
+  margin-bottom: 12px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.note span {
+  color: #555;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.note button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.note button:hover {
+  background-color: #d32f2f;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 3</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script type="text/javascript">
+      const App = () => {
+        const [msg, setMsg] = React.useState("");
+        const postData = async () => {
+          let phonenumber = "133456765432345";
+          try {
+            const res = await axios.post("https://chimpu.xyz/api/post.php", {
+              phonenumber,
+            });
+            setMsg(res.data.msg);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        return React.createElement(
+          "div",
+          {},
+          React.createElement("button", { onClick: postData }, "post number"),
+          React.createElement("h1", {}, msg)
+        );
+      };
+      const root = document.getElementById("root");
+      const reactRoot = ReactDOM.createRoot(root);
+      reactRoot.render(React.createElement(App));
+    </script>
+  </body>
+</html>
